@@ -1,0 +1,1258 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>المكتبة العلمية - عباقرة عبر التاريخ</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700;900&family=Tajawal:wght@300;400;500;700;800&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --bg-primary: #0a0e27;
+            --bg-secondary: #151b3d;
+            --text-primary: #f8fafc;
+            --text-secondary: #cbd5e1;
+            --accent: #6366f1;
+            --accent-hover: #4f46e5;
+            --accent-light: #818cf8;
+            --accent-orange: #f59e0b;
+            --accent-green: #10b981;
+            --accent-purple: #8b5cf6;
+            --accent-pink: #ec4899;
+            --card-bg: #1e293b;
+            --border: #334155;
+        }
+
+        body.light-mode {
+            --bg-primary: #f1f5f9;
+            --bg-secondary: #ffffff;
+            --text-primary: #1e293b;
+            --text-secondary: #475569;
+            --card-bg: #ffffff;
+            --border: #e2e8f0;
+        }
+
+        body {
+            font-family: 'Cairo', 'Tajawal', sans-serif;
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            transition: background 0.4s ease;
+            line-height: 1.8;
+        }
+
+        header {
+            background: var(--bg-secondary);
+            padding: 1.5rem 2rem;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.2);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            border-bottom: 2px solid var(--border);
+            backdrop-filter: blur(10px);
+        }
+
+        nav {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .logo {
+            font-size: 2rem;
+            font-weight: 900;
+            background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 50%, #ec4899 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            display: flex;
+            align-items: center;
+            gap: 0.7rem;
+            letter-spacing: -0.5px;
+        }
+
+        .logo i {
+            animation: float 3s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2.5rem;
+            align-items: center;
+        }
+
+        .nav-links a {
+            color: var(--text-primary);
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1.05rem;
+            transition: all 0.3s;
+            position: relative;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            right: 0;
+            width: 0;
+            height: 2px;
+            background: var(--accent);
+            transition: width 0.3s ease;
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        .theme-toggle {
+            background: linear-gradient(135deg, var(--accent) 0%, var(--accent-hover) 100%);
+            color: white;
+            border: none;
+            padding: 0.7rem 1.3rem;
+            border-radius: 25px;
+            cursor: pointer;
+            font-size: 1.1rem;
+            transition: all 0.3s;
+            box-shadow: 0 4px 15px rgba(99, 102, 241, 0.3);
+            font-weight: 600;
+        }
+
+        .theme-toggle:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(99, 102, 241, 0.4);
+        }
+
+        .hero {
+            text-align: center;
+            padding: 5rem 2rem;
+            background: linear-gradient(135deg, var(--bg-secondary) 0%, var(--bg-primary) 100%);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '📚';
+            position: absolute;
+            font-size: 20rem;
+            opacity: 0.03;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            animation: pulse 8s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: translate(-50%, -50%) scale(1); }
+            50% { transform: translate(-50%, -50%) scale(1.1); }
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1.5rem;
+            background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 50%, #ec4899 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            font-weight: 900;
+            letter-spacing: -1px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero p {
+            font-size: 1.3rem;
+            color: var(--text-secondary);
+            max-width: 750px;
+            margin: 0 auto;
+            font-weight: 500;
+            position: relative;
+            z-index: 1;
+        }
+
+        .tabs-container {
+            max-width: 1400px;
+            margin: 3rem auto 2rem;
+            padding: 0 2rem;
+        }
+
+        .tabs {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+            justify-content: center;
+            margin-bottom: 3rem;
+        }
+
+        .tab-btn {
+            padding: 1rem 2rem;
+            border: 2px solid var(--border);
+            background: var(--card-bg);
+            color: var(--text-primary);
+            border-radius: 25px;
+            cursor: pointer;
+            font-size: 1.1rem;
+            transition: all 0.3s;
+            font-family: 'Cairo', sans-serif;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            gap: 0.7rem;
+        }
+
+        .tab-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(99, 102, 241, 0.3);
+        }
+
+        .tab-btn.active {
+            background: linear-gradient(135deg, var(--accent) 0%, var(--accent-hover) 100%);
+            color: white;
+            border-color: transparent;
+            box-shadow: 0 6px 20px rgba(99, 102, 241, 0.4);
+        }
+
+        .tab-content {
+            display: none;
+            animation: fadeIn 0.5s ease;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        /* Quotes Section */
+        .quotes-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2.5rem;
+        }
+
+        .quote-card {
+            background: var(--card-bg);
+            padding: 2.5rem;
+            border-radius: 20px;
+            border: 2px solid var(--border);
+            position: relative;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            overflow: hidden;
+        }
+
+        .quote-card::before {
+            content: '"';
+            position: absolute;
+            top: -20px;
+            right: 20px;
+            font-size: 8rem;
+            color: var(--accent);
+            opacity: 0.1;
+            font-family: Georgia, serif;
+        }
+
+        .quote-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 40px rgba(99, 102, 241, 0.3);
+            border-color: var(--accent);
+        }
+
+        .quote-text {
+            font-size: 1.2rem;
+            line-height: 1.9;
+            font-style: italic;
+            color: var(--text-primary);
+            margin-bottom: 1.5rem;
+            font-weight: 600;
+            position: relative;
+            z-index: 1;
+        }
+
+        .quote-author {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            border-top: 2px solid var(--border);
+            padding-top: 1.5rem;
+        }
+
+        .author-avatar {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--accent) 0%, var(--accent-light) 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.8rem;
+            color: white;
+        }
+
+        .author-info h4 {
+            font-size: 1.2rem;
+            font-weight: 800;
+            margin-bottom: 0.3rem;
+        }
+
+        .author-info p {
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+            font-weight: 600;
+        }
+
+        /* Books Section */
+        .books-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2.5rem;
+        }
+
+        .book-card {
+            background: var(--card-bg);
+            border-radius: 20px;
+            overflow: hidden;
+            border: 2px solid var(--border);
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        .book-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 40px rgba(99, 102, 241, 0.3);
+        }
+
+        .book-cover {
+            height: 250px;
+            background: linear-gradient(135deg, var(--accent) 0%, var(--accent-hover) 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 5rem;
+            color: white;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .book-cover::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(45deg, rgba(0,0,0,0.2) 0%, transparent 100%);
+        }
+
+        .book-info {
+            padding: 2rem;
+        }
+
+        .book-title {
+            font-size: 1.4rem;
+            font-weight: 800;
+            margin-bottom: 0.8rem;
+            color: var(--text-primary);
+        }
+
+        .book-author {
+            color: var(--accent-light);
+            font-size: 1.05rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+        }
+
+        .book-description {
+            color: var(--text-secondary);
+            line-height: 1.8;
+            margin-bottom: 1.2rem;
+            font-size: 1rem;
+            font-weight: 500;
+        }
+
+        .book-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .book-tag {
+            padding: 0.4rem 1rem;
+            background: rgba(99, 102, 241, 0.2);
+            border-radius: 15px;
+            font-size: 0.85rem;
+            color: var(--accent-light);
+            font-weight: 600;
+            border: 1px solid var(--accent);
+        }
+
+        .book-rating {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: var(--accent-orange);
+            font-size: 1.1rem;
+            font-weight: 700;
+        }
+
+        /* Movies Section */
+        .movies-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 2.5rem;
+        }
+
+        .movie-card {
+            background: var(--card-bg);
+            border-radius: 20px;
+            overflow: hidden;
+            border: 2px solid var(--border);
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        .movie-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 40px rgba(99, 102, 241, 0.3);
+        }
+
+        .movie-poster {
+            height: 280px;
+            background: linear-gradient(135deg, #f59e0b 0%, #ef4444 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 5rem;
+            color: white;
+            position: relative;
+        }
+
+        .play-icon {
+            position: absolute;
+            width: 70px;
+            height: 70px;
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            color: var(--accent);
+            cursor: pointer;
+            transition: all 0.3s;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+        }
+
+        .play-icon:hover {
+            transform: scale(1.1);
+            background: white;
+        }
+
+        .movie-info {
+            padding: 2rem;
+        }
+
+        .movie-title {
+            font-size: 1.4rem;
+            font-weight: 800;
+            margin-bottom: 0.5rem;
+            color: var(--text-primary);
+        }
+
+        .movie-year {
+            color: var(--accent-light);
+            font-size: 0.95rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+        }
+
+        .movie-description {
+            color: var(--text-secondary);
+            line-height: 1.8;
+            margin-bottom: 1.2rem;
+            font-size: 1rem;
+            font-weight: 500;
+        }
+
+        .movie-meta {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-top: 1rem;
+            border-top: 2px solid var(--border);
+        }
+
+        .movie-duration {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: var(--text-secondary);
+            font-weight: 600;
+        }
+
+        .movie-rating {
+            display: flex;
+            align-items: center;
+            gap: 0.3rem;
+            color: var(--accent-orange);
+            font-weight: 700;
+        }
+
+        /* Articles Section */
+        .articles-grid {
+            display: grid;
+            gap: 2rem;
+        }
+
+        .article-card {
+            background: var(--card-bg);
+            border-radius: 20px;
+            padding: 2.5rem;
+            border: 2px solid var(--border);
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            display: flex;
+            gap: 2rem;
+        }
+
+        .article-card:hover {
+            transform: translateX(-10px);
+            box-shadow: 0 10px 30px rgba(99, 102, 241, 0.3);
+            border-color: var(--accent);
+        }
+
+        .article-icon {
+            width: 100px;
+            height: 100px;
+            min-width: 100px;
+            background: linear-gradient(135deg, var(--accent) 0%, var(--accent-light) 100%);
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3rem;
+            color: white;
+        }
+
+        .article-content {
+            flex: 1;
+        }
+
+        .article-category {
+            display: inline-block;
+            padding: 0.4rem 1rem;
+            background: rgba(99, 102, 241, 0.2);
+            border-radius: 15px;
+            font-size: 0.85rem;
+            color: var(--accent-light);
+            font-weight: 700;
+            margin-bottom: 1rem;
+            border: 1px solid var(--accent);
+        }
+
+        .article-title {
+            font-size: 1.6rem;
+            font-weight: 800;
+            margin-bottom: 1rem;
+            color: var(--text-primary);
+        }
+
+        .article-excerpt {
+            color: var(--text-secondary);
+            line-height: 1.9;
+            margin-bottom: 1.5rem;
+            font-size: 1.05rem;
+            font-weight: 500;
+        }
+
+        .article-meta {
+            display: flex;
+            gap: 2rem;
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+            font-weight: 600;
+        }
+
+        .article-meta i {
+            color: var(--accent);
+            margin-left: 0.5rem;
+        }
+
+        .read-more {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: var(--accent-light);
+            font-weight: 700;
+            margin-top: 1rem;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .read-more:hover {
+            gap: 1rem;
+            color: var(--accent);
+        }
+
+        footer {
+            background: var(--bg-secondary);
+            text-align: center;
+            padding: 3rem 2rem;
+            margin-top: 5rem;
+            border-top: 2px solid var(--border);
+        }
+
+        footer p {
+            color: var(--text-secondary);
+            font-size: 1.05rem;
+            font-weight: 500;
+        }
+
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2.3rem;
+            }
+
+            .nav-links {
+                flex-direction: column;
+                gap: 1rem;
+            }
+
+            .quotes-grid, .books-grid, .movies-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .article-card {
+                flex-direction: column;
+            }
+
+            .tabs {
+                justify-content: flex-start;
+                overflow-x: auto;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav>
+            <div class="logo">
+                <i class="fas fa-book-open"></i>
+                المكتبة العلمية
+            </div>
+            <div class="nav-links">
+                <a href="index.html">الرئيسية</a>
+                <a href="women.html">نساء في العلوم</a>
+                <a href="timeline.html">الخط الزمني العلمي</a>
+                <a href="The Scientific Library.html">المكتبة العلمية</a>
+                <a href="Arab and Muslim Scientists.html">العلماء العرب والمسلمون</a>
+                <a href="about.html">عن الموقع</a>
+
+                <button class="theme-toggle" onclick="toggleTheme()">
+                    <i class="fas fa-moon"></i>
+                </button>
+            </div>
+        </nav>
+    </header>
+
+    <section class="hero">
+        <h1>📚 المكتبة العلمية</h1>
+        <p>اكتشف عالم المعرفة من خلال الاقتباسات الملهمة والكتب القيمة والأفلام الوثائقية والمقالات المفيدة</p>
+    </section>
+
+    <div class="tabs-container">
+        <div class="tabs">
+            <button class="tab-btn active" data-tab="quotes">
+                <i class="fas fa-quote-right"></i>
+                اقتباسات ملهمة
+            </button>
+            <button class="tab-btn" data-tab="books">
+                <i class="fas fa-book"></i>
+                كتب علمية
+            </button>
+            <button class="tab-btn" data-tab="movies">
+                <i class="fas fa-film"></i>
+                أفلام وثائقية
+            </button>
+            <button class="tab-btn" data-tab="articles">
+                <i class="fas fa-newspaper"></i>
+                مقالات علمية
+            </button>
+        </div>
+
+        <div class="container">
+            <!-- Quotes Tab -->
+            <div class="tab-content active" id="quotes">
+                <div class="quotes-grid">
+                    <div class="quote-card">
+                        <p class="quote-text">
+                            "الخيال أهم من المعرفة. المعرفة محدودة، أما الخيال فيطوق العالم."
+                        </p>
+                        <div class="quote-author">
+                            <div class="author-avatar">🧑‍🔬</div>
+                            <div class="author-info">
+                                <h4>ألبرت أينشتاين</h4>
+                                <p>عالم فيزياء</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="quote-card">
+                        <p class="quote-text">
+                            "العلم ليس سوى إعادة ترتيب لتفكيرك اليومي."
+                        </p>
+                        <div class="quote-author">
+                            <div class="author-avatar">⚛️</div>
+                            <div class="author-info">
+                                <h4>ألبرت أينشتاين</h4>
+                                <p>عالم فيزياء</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="quote-card">
+                        <p class="quote-text">
+                            "لا يوجد شيء في الحياة يُخشى، بل يُفهم فقط. حان الوقت الآن لفهم المزيد حتى نخاف أقل."
+                        </p>
+                        <div class="quote-author">
+                            <div class="author-avatar">👩‍🔬</div>
+                            <div class="author-info">
+                                <h4>ماري كوري</h4>
+                                <p>عالمة كيمياء وفيزياء</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="quote-card">
+                        <p class="quote-text">
+                            "إذا رأيت أبعد من الآخرين، فذلك لأنني وقفت على أكتاف العمالقة."
+                        </p>
+                        <div class="quote-author">
+                            <div class="author-avatar">🍎</div>
+                            <div class="author-info">
+                                <h4>إسحاق نيوتن</h4>
+                                <p>عالم فيزياء ورياضيات</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="quote-card">
+                        <p class="quote-text">
+                            "أهم شيء هو ألا تتوقف عن التساؤل. الفضول له سبب وجوده الخاص."
+                        </p>
+                        <div class="quote-author">
+                            <div class="author-avatar">💡</div>
+                            <div class="author-info">
+                                <h4>ألبرت أينشتاين</h4>
+                                <p>عالم فيزياء</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="quote-card">
+                        <p class="quote-text">
+                            "العلم والحياة اليومية لا يمكن ولا ينبغي أن ينفصلا."
+                        </p>
+                        <div class="quote-author">
+                            <div class="author-avatar">🧬</div>
+                            <div class="author-info">
+                                <h4>روزاليند فرانكلين</h4>
+                                <p>عالمة كيمياء</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="quote-card">
+                        <p class="quote-text">
+                            "من يطلب العلم يدرك أن كل يوم يزداد علماً وكل يوم يزداد جهلاً، أي يزداد علماً بازدياد جهله."
+                        </p>
+                        <div class="quote-author">
+                            <div class="author-avatar">📚</div>
+                            <div class="author-info">
+                                <h4>ابن سينا</h4>
+                                <p>طبيب وفيلسوف</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="quote-card">
+                        <p class="quote-text">
+                            "لا تدع أحداً يحد من خيالك. كن شجاعاً وجريئاً في التفكير."
+                        </p>
+                        <div class="quote-author">
+                            <div class="author-avatar">👩‍🚀</div>
+                            <div class="author-info">
+                                <h4>ماي جيميسون</h4>
+                                <p>رائدة فضاء</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="quote-card">
+                        <p class="quote-text">
+                            "الأشخاص الوحيدون الذين لا يرتكبون أخطاء هم أولئك الذين لا يفعلون شيئاً."
+                        </p>
+                        <div class="quote-author">
+                            <div class="author-avatar">🔬</div>
+                            <div class="author-info">
+                                <h4>ألبرت أينشتاين</h4>
+                                <p>عالم فيزياء</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Books Tab -->
+            <div class="tab-content" id="books">
+                <div class="books-grid">
+                    <div class="book-card">
+                        <div class="book-cover">📖</div>
+                        <div class="book-info">
+                            <h3 class="book-title">موجز تاريخ الزمن</h3>
+                            <p class="book-author">ستيفن هوكينج</p>
+                            <p class="book-description">
+                                رحلة مذهلة عبر الكون من الانفجار الكبير إلى الثقوب السوداء، مكتوبة بأسلوب مبسط يفهمه الجميع.
+                            </p>
+                            <div class="book-tags">
+                                <span class="book-tag">فيزياء</span>
+                                <span class="book-tag">كون</span>
+                            </div>
+                            <div class="book-rating">
+                                <i class="fas fa-star"></i>
+                                <span>4.8/5</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="book-card">
+                        <div class="book-cover" style="background: linear-gradient(135deg, #10b981 0%, #059669 100%);">🧪</div>
+                        <div class="book-info">
+                            <h3 class="book-title">الكون في قشرة جوز</h3>
+                            <p class="book-author">ستيفن هوكينج</p>
+                            <p class="book-description">
+                                يشرح أحدث الاكتشافات في الفيزياء والكون بطريقة مصورة وسهلة الفهم، مع رسومات توضيحية رائعة.
+                            </p>
+                            <div class="book-tags">
+                                <span class="book-tag">فيزياء</span>
+                                <span class="book-tag">علم الكون</span>
+                            </div>
+                            <div class="book-rating">
+                                <i class="fas fa-star"></i>
+                                <span>4.7/5</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="book-card">
+                        <div class="book-cover" style="background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%);">🧬</div>
+                        <div class="book-info">
+                            <h3 class="book-title">الجين: تاريخ حميم</h3>
+                            <p class="book-author">سيدهارتا موخيرجي</p>
+                            <p class="book-description">
+                                رحلة عبر تاريخ علم الوراثة من مندل إلى تحرير الجينات الحديث، بأسلوب سردي مشوق.
+                            </p>
+                            <div class="book-tags">
+                                <span class="book-tag">علم الوراثة</span>
+                                <span class="book-tag">بيولوجيا</span>
+                            </div>
+                            <div class="book-rating">
+                                <i class="fas fa-star"></i>
+                                <span>4.9/5</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="book-card">
+                        <div class="book-cover" style="background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);">🔬</div>
+                        <div class="book-info">
+                            <h3 class="book-title">كون</h3>
+                            <p class="book-author">كارل ساغان</p>
+                            <p class="book-description">
+                                رحلة ملحمية عبر الكون والزمن، تستكشف العلم والحضارة الإنسانية بأسلوب شاعري ملهم.
+                            </p>
+                            <div class="book-tags">
+                                <span class="book-tag">فضاء</span>
+                                <span class="book-tag">علم الفلك</span>
+                            </div>
+                            <div class="book-rating">
+                                <i class="fas fa-star"></i>
+                                <span>4.9/5</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="book-card">
+                        <div class="book-cover" style="background: linear-gradient(135deg, #8b5cf6 0%, #7c3aed 100%);">💻</div>
+                        <div class="book-info">
+                            <h3 class="book-title">الخوارزميات للعيش</h3>
+                            <p class="book-author">برايان كريستيان وتوم غريفيثس</p>
+                            <p class="book-description">
+                                كيف يمكن لعلم الحاسوب أن يساعدنا في حل المشاكل اليومية واتخاذ قرارات أفضل في الحياة.
+                            </p>
+                            <div class="book-tags">
+                                <span class="book-tag">علوم حاسوب</span>
+                                <span class="book-tag">خوارزميات</span>
+                            </div>
+                            <div class="book-rating">
+                                <i class="fas fa-star"></i>
+                                <span>4.6/5</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="book-card">
+                        <div class="book-cover" style="background: linear-gradient(135deg, #ec4899 0%, #db2777 100%);">⚛️</div>
+                        <div class="book-info">
+                            <h3 class="book-title">الكون الأنيق</h3>
+                            <p class="book-author">برايان غرين</p>
+                            <p class="book-description">
+                                شرح مبسط لنظرية الأوتار وكيف تحاول توحيد قوانين الفيزياء في نظرية واحدة شاملة.
+                            </p>
+                            <div class="book-tags">
+                                <span class="book-tag">فيزياء</span>
+                                <span class="book-tag">نظرية الأوتار</span>
+                            </div>
+                            <div class="book-rating">
+                                <i class="fas fa-star"></i>
+                                <span>4.5/5</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Movies Tab -->
+            <div class="tab-content" id="movies">
+                <div class="movies-grid">
+                    <div class="movie-card">
+                        <div class="movie-poster">
+                            🎬
+                            <div class="play-icon">
+                                <i class="fas fa-play"></i>
+                            </div>
+                        </div>
+                        <div class="movie-info">
+                            <h3 class="movie-title">كوسموس: أوديسا الزمان والفضاء</h3>
+                            <p class="movie-year">2014</p>
+                            <p class="movie-description">
+                                سلسلة وثائقية رائعة تستكشف الكون والعلوم بأسلوب بصري مذهل، من تقديم نيل ديغراس تايسون.
+                            </p>
+                            <div class="movie-meta">
+                                <div class="movie-duration">
+                                    <i class="fas fa-clock"></i>
+                                    <span>13 حلقة، 45 دقيقة</span>
+                                </div>
+                                <div class="movie-rating">
+                                    <i class="fas fa-star"></i>
+                                    <span>9.3/10</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="movie-card">
+                        <div class="movie-poster" style="background: linear-gradient(135deg, #10b981 0%, #059669 100%);">
+                            🧬
+                            <div class="play-icon">
+                                <i class="fas fa-play"></i>
+                            </div>
+                        </div>
+                        <div class="movie-info">
+                            <h3 class="movie-title">أرقام خفية</h3>
+                            <p class="movie-year">2016</p>
+                            <p class="movie-description">
+                                قصة ملهمة عن ثلاث عالمات رياضيات أمريكيات من أصل أفريقي ساعدن في برنامج الفضاء الأمريكي.
+                            </p>
+                            <div class="movie-meta">
+                                <div class="movie-duration">
+                                    <i class="fas fa-clock"></i>
+                                    <span>127 دقيقة</span>
+                                </div>
+                                <div class="movie-rating">
+                                    <i class="fas fa-star"></i>
+                                    <span>7.8/10</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="movie-card">
+                        <div class="movie-poster" style="background: linear-gradient(135deg, #6366f1 0%, #4f46e5 100%);">
+                            🎓
+                            <div class="play-icon">
+                                <i class="fas fa-play"></i>
+                            </div>
+                        </div>
+                        <div class="movie-info">
+                            <h3 class="movie-title">نظرية كل شيء</h3>
+                            <p class="movie-year">2014</p>
+                            <p class="movie-description">
+                                فيلم درامي يروي قصة حياة ستيفن هوكينج وكفاحه مع المرض وإنجازاته العلمية العظيمة.
+                            </p>
+                            <div class="movie-meta">
+                                <div class="movie-duration">
+                                    <i class="fas fa-clock"></i>
+                                    <span>123 دقيقة</span>
+                                </div>
+                                <div class="movie-rating">
+                                    <i class="fas fa-star"></i>
+                                    <span>7.7/10</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="movie-card">
+                        <div class="movie-poster" style="background: linear-gradient(135deg, #ec4899 0%, #db2777 100%);">
+                            👩‍🔬
+                            <div class="play-icon">
+                                <i class="fas fa-play"></i>
+                            </div>
+                        </div>
+                        <div class="movie-info">
+                            <h3 class="movie-title">ماري كوري</h3>
+                            <p class="movie-year">2017</p>
+                            <p class="movie-description">
+                                فيلم سيرة ذاتية عن حياة ماري كوري، أول امرأة تفوز بجائزة نوبل وإنجازاتها الرائدة في الكيمياء.
+                            </p>
+                            <div class="movie-meta">
+                                <div class="movie-duration">
+                                    <i class="fas fa-clock"></i>
+                                    <span>100 دقيقة</span>
+                                </div>
+                                <div class="movie-rating">
+                                    <i class="fas fa-star"></i>
+                                    <span>6.3/10</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="movie-card">
+                        <div class="movie-poster" style="background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);">
+                            🧠
+                            <div class="play-icon">
+                                <i class="fas fa-play"></i>
+                            </div>
+                        </div>
+                        <div class="movie-info">
+                            <h3 class="movie-title">لعبة التقليد</h3>
+                            <p class="movie-year">2014</p>
+                            <p class="movie-description">
+                                قصة آلان تورينج وفريقه في كسر شيفرة إنيجما خلال الحرب العالمية الثانية وإنشاء أول حاسوب.
+                            </p>
+                            <div class="movie-meta">
+                                <div class="movie-duration">
+                                    <i class="fas fa-clock"></i>
+                                    <span>114 دقيقة</span>
+                                </div>
+                                <div class="movie-rating">
+                                    <i class="fas fa-star"></i>
+                                    <span>8.0/10</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="movie-card">
+                        <div class="movie-poster" style="background: linear-gradient(135deg, #8b5cf6 0%, #7c3aed 100%);">
+                            🌌
+                            <div class="play-icon">
+                                <i class="fas fa-play"></i>
+                            </div>
+                        </div>
+                        <div class="movie-info">
+                            <h3 class="movie-title">الكوكب الأزرق</h3>
+                            <p class="movie-year">2001</p>
+                            <p class="movie-description">
+                                سلسلة وثائقية خلابة تستكشف محيطات الأرض وأعماقها بتصوير مذهل وموسيقى ساحرة.
+                            </p>
+                            <div class="movie-meta">
+                                <div class="movie-duration">
+                                    <i class="fas fa-clock"></i>
+                                    <span>8 حلقات، 50 دقيقة</span>
+                                </div>
+                                <div class="movie-rating">
+                                    <i class="fas fa-star"></i>
+                                    <span>9.1/10</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Articles Tab -->
+            <div class="tab-content" id="articles">
+                <div class="articles-grid">
+                    <div class="article-card">
+                        <div class="article-icon">⚛️</div>
+                        <div class="article-content">
+                            <span class="article-category">فيزياء</span>
+                            <h3 class="article-title">كيف تعمل الثقوب السوداء؟</h3>
+                            <p class="article-excerpt">
+                                الثقوب السوداء هي من أكثر الظواهر الكونية غموضاً وإثارة. في هذا المقال نشرح بأسلوب مبسط كيف تتكون الثقوب السوداء، وما الذي يحدث داخلها، ولماذا لا يمكن للضوء الهروب منها.
+                            </p>
+                            <div class="article-meta">
+                                <span><i class="fas fa-clock"></i> 8 دقائق قراءة</span>
+                                <span><i class="fas fa-eye"></i> 12,450 مشاهدة</span>
+                            </div>
+                            <div class="read-more">
+                                اقرأ المزيد <i class="fas fa-arrow-left"></i>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="article-card">
+                        <div class="article-icon" style="background: linear-gradient(135deg, #10b981 0%, #059669 100%);">🧬</div>
+                        <div class="article-content">
+                            <span class="article-category">علم الوراثة</span>
+                            <h3 class="article-title">تحرير الجينات: مستقبل الطب</h3>
+                            <p class="article-excerpt">
+                                تقنية كريسبر CRISPR أحدثت ثورة في علم الوراثة. تعرف على كيفية عمل هذه التقنية المذهلة وإمكانياتها في علاج الأمراض الوراثية والقضاء على السرطان، مع مناقشة الأخلاقيات المرتبطة بها.
+                            </p>
+                            <div class="article-meta">
+                                <span><i class="fas fa-clock"></i> 10 دقائق قراءة</span>
+                                <span><i class="fas fa-eye"></i> 18,920 مشاهدة</span>
+                            </div>
+                            <div class="read-more">
+                                اقرأ المزيد <i class="fas fa-arrow-left"></i>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="article-card">
+                        <div class="article-icon" style="background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);">🤖</div>
+                        <div class="article-content">
+                            <span class="article-category">ذكاء اصطناعي</span>
+                            <h3 class="article-title">الذكاء الاصطناعي: نعمة أم نقمة؟</h3>
+                            <p class="article-excerpt">
+                                الذكاء الاصطناعي يتطور بسرعة مذهلة. نستكشف في هذا المقال كيف يغير الذكاء الاصطناعي حياتنا اليومية، من المساعدات الصوتية إلى القيادة الذاتية، ونناقش التحديات والفرص المستقبلية.
+                            </p>
+                            <div class="article-meta">
+                                <span><i class="fas fa-clock"></i> 12 دقيقة قراءة</span>
+                                <span><i class="fas fa-eye"></i> 25,340 مشاهدة</span>
+                            </div>
+                            <div class="read-more">
+                                اقرأ المزيد <i class="fas fa-arrow-left"></i>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="article-card">
+                        <div class="article-icon" style="background: linear-gradient(135deg, #ec4899 0%, #db2777 100%);">🌍</div>
+                        <div class="article-content">
+                            <span class="article-category">بيئة</span>
+                            <h3 class="article-title">تغير المناخ: العلم وراء الأزمة</h3>
+                            <p class="article-excerpt">
+                                فهم علم تغير المناخ ضروري لمواجهة هذا التحدي العالمي. نشرح في هذا المقال الأدلة العلمية على تغير المناخ، أسبابه الرئيسية، وتأثيراته المتوقعة، وما يمكننا فعله للحد منه.
+                            </p>
+                            <div class="article-meta">
+                                <span><i class="fas fa-clock"></i> 15 دقيقة قراءة</span>
+                                <span><i class="fas fa-eye"></i> 31,280 مشاهدة</span>
+                            </div>
+                            <div class="read-more">
+                                اقرأ المزيد <i class="fas fa-arrow-left"></i>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="article-card">
+                        <div class="article-icon" style="background: linear-gradient(135deg, #8b5cf6 0%, #7c3aed 100%);">🚀</div>
+                        <div class="article-content">
+                            <span class="article-category">فضاء</span>
+                            <h3 class="article-title">استعمار المريخ: حلم أم حقيقة؟</h3>
+                            <p class="article-excerpt">
+                                هل يمكن للبشر العيش على المريخ؟ نستعرض الخطط الحالية لاستعمار الكوكب الأحمر، التحديات التقنية والبيولوجية، والتقنيات المطلوبة لجعل هذا الحلم حقيقة في العقود القادمة.
+                            </p>
+                            <div class="article-meta">
+                                <span><i class="fas fa-clock"></i> 11 دقيقة قراءة</span>
+                                <span><i class="fas fa-eye"></i> 22,150 مشاهدة</span>
+                            </div>
+                            <div class="read-more">
+                                اقرأ المزيد <i class="fas fa-arrow-left"></i>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="article-card">
+                        <div class="article-icon" style="background: linear-gradient(135deg, #06b6d4 0%, #0891b2 100%);">💊</div>
+                        <div class="article-content">
+                            <span class="article-category">طب</span>
+                            <h3 class="article-title">الطب النانوي: ثورة في العلاج</h3>
+                            <p class="article-excerpt">
+                                تكنولوجيا النانو تفتح آفاقاً جديدة في الطب. اكتشف كيف يمكن للروبوتات النانوية استهداف الخلايا السرطانية بدقة، وتوصيل الأدوية مباشرة إلى الأنسجة المصابة، وإصلاح الأضرار على المستوى الخلوي.
+                            </p>
+                            <div class="article-meta">
+                                <span><i class="fas fa-clock"></i> 9 دقائق قراءة</span>
+                                <span><i class="fas fa-eye"></i> 16,780 مشاهدة</span>
+                            </div>
+                            <div class="read-more">
+                                اقرأ المزيد <i class="fas fa-arrow-left"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <p>&copy; 2025 عباقرة عبر التاريخ | صُنع بواسطة عشاق العلوم</p>
+        <p style="margin-top: 0.5rem;">اقرأ وتعلم واستمتع 📚✨</p>
+    </footer>
+
+    <script>
+        // Tab functionality
+        const tabButtons = document.querySelectorAll('.tab-btn');
+        const tabContents = document.querySelectorAll('.tab-content');
+
+        tabButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                const targetTab = button.dataset.tab;
+                
+                // Remove active class from all buttons and contents
+                tabButtons.forEach(btn => btn.classList.remove('active'));
+                tabContents.forEach(content => content.classList.remove('active'));
+                
+                // Add active class to clicked button and corresponding content
+                button.classList.add('active');
+                document.getElementById(targetTab).classList.add('active');
+            });
+        });
+
+        function toggleTheme() {
+            document.body.classList.toggle('light-mode');
+            const icon = document.querySelector('.theme-toggle i');
+            if (document.body.classList.contains('light-mode')) {
+                icon.className = 'fas fa-sun';
+            } else {
+                icon.className = 'fas fa-moon';
+            }
+        }
+    </script>
+</body>
+</html>

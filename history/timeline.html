@@ -1,0 +1,871 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>الخط الزمني للاكتشافات العلمية</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700;900&family=Tajawal:wght@300;400;500;700;800&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --bg-primary: #0a0e27;
+            --bg-secondary: #151b3d;
+            --text-primary: #f8fafc;
+            --text-secondary: #cbd5e1;
+            --accent: #6366f1;
+            --accent-hover: #4f46e5;
+            --accent-light: #818cf8;
+            --physics: #3b82f6;
+            --chemistry: #10b981;
+            --medicine: #ef4444;
+            --math: #f59e0b;
+            --tech: #8b5cf6;
+            --card-bg: #1e293b;
+            --border: #334155;
+        }
+
+        body.light-mode {
+            --bg-primary: #f1f5f9;
+            --bg-secondary: #ffffff;
+            --text-primary: #1e293b;
+            --text-secondary: #475569;
+            --card-bg: #ffffff;
+            --border: #e2e8f0;
+        }
+
+        body {
+            font-family: 'Cairo', 'Tajawal', sans-serif;
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            transition: background 0.4s ease;
+            line-height: 1.8;
+            overflow-x: hidden;
+        }
+
+        header {
+            background: var(--bg-secondary);
+            padding: 1.5rem 2rem;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.2);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            border-bottom: 2px solid var(--border);
+            backdrop-filter: blur(10px);
+        }
+
+        nav {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .logo {
+            font-size: 2rem;
+            font-weight: 900;
+            background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 50%, #ec4899 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            display: flex;
+            align-items: center;
+            gap: 0.7rem;
+            letter-spacing: -0.5px;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2.5rem;
+            align-items: center;
+        }
+
+        .nav-links a {
+            color: var(--text-primary);
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1.05rem;
+            transition: all 0.3s;
+            position: relative;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            right: 0;
+            width: 0;
+            height: 2px;
+            background: var(--accent);
+            transition: width 0.3s ease;
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        .theme-toggle {
+            background: linear-gradient(135deg, var(--accent) 0%, var(--accent-hover) 100%);
+            color: white;
+            border: none;
+            padding: 0.7rem 1.3rem;
+            border-radius: 25px;
+            cursor: pointer;
+            font-size: 1.1rem;
+            transition: all 0.3s;
+            box-shadow: 0 4px 15px rgba(99, 102, 241, 0.3);
+            font-weight: 600;
+        }
+
+        .hero {
+            text-align: center;
+            padding: 4rem 2rem 3rem;
+            background: linear-gradient(135deg, var(--bg-secondary) 0%, var(--bg-primary) 100%);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '⏳';
+            position: absolute;
+            font-size: 20rem;
+            opacity: 0.03;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            animation: rotate 20s linear infinite;
+        }
+
+        @keyframes rotate {
+            0% { transform: translate(-50%, -50%) rotate(0deg); }
+            100% { transform: translate(-50%, -50%) rotate(360deg); }
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+            background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 50%, #ec4899 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            font-weight: 900;
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero p {
+            font-size: 1.3rem;
+            color: var(--text-secondary);
+            max-width: 750px;
+            margin: 0 auto;
+            font-weight: 500;
+            position: relative;
+            z-index: 1;
+        }
+
+        .controls-section {
+            max-width: 1400px;
+            margin: 2rem auto;
+            padding: 0 2rem;
+        }
+
+        .era-selector {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+            justify-content: center;
+            margin-bottom: 2rem;
+        }
+
+        .era-btn {
+            padding: 0.8rem 1.5rem;
+            border: 2px solid var(--border);
+            background: var(--card-bg);
+            color: var(--text-primary);
+            border-radius: 25px;
+            cursor: pointer;
+            font-size: 1rem;
+            transition: all 0.3s;
+            font-family: 'Cairo', sans-serif;
+            font-weight: 600;
+        }
+
+        .era-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 15px rgba(99, 102, 241, 0.2);
+        }
+
+        .era-btn.active {
+            background: linear-gradient(135deg, var(--accent) 0%, var(--accent-hover) 100%);
+            color: white;
+            border-color: transparent;
+            box-shadow: 0 4px 15px rgba(99, 102, 241, 0.4);
+        }
+
+        .field-filters {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+            justify-content: center;
+            margin-bottom: 2rem;
+        }
+
+        .field-tag {
+            padding: 0.6rem 1.2rem;
+            border-radius: 20px;
+            cursor: pointer;
+            font-size: 0.95rem;
+            transition: all 0.3s;
+            font-weight: 600;
+            border: 2px solid transparent;
+        }
+
+        .field-tag.physics {
+            background: rgba(59, 130, 246, 0.2);
+            color: var(--physics);
+            border-color: var(--physics);
+        }
+
+        .field-tag.chemistry {
+            background: rgba(16, 185, 129, 0.2);
+            color: var(--chemistry);
+            border-color: var(--chemistry);
+        }
+
+        .field-tag.medicine {
+            background: rgba(239, 68, 68, 0.2);
+            color: var(--medicine);
+            border-color: var(--medicine);
+        }
+
+        .field-tag.math {
+            background: rgba(245, 158, 11, 0.2);
+            color: var(--math);
+            border-color: var(--math);
+        }
+
+        .field-tag.tech {
+            background: rgba(139, 92, 246, 0.2);
+            color: var(--tech);
+            border-color: var(--tech);
+        }
+
+        .field-tag:hover {
+            transform: scale(1.05);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .field-tag.inactive {
+            opacity: 0.3;
+        }
+
+        .timeline-container {
+            max-width: 1400px;
+            margin: 3rem auto;
+            padding: 0 2rem;
+            position: relative;
+        }
+
+        .timeline-line {
+            position: absolute;
+            right: 50%;
+            top: 0;
+            bottom: 0;
+            width: 4px;
+            background: linear-gradient(180deg, 
+                var(--physics) 0%, 
+                var(--chemistry) 25%, 
+                var(--medicine) 50%, 
+                var(--math) 75%, 
+                var(--tech) 100%);
+            transform: translateX(50%);
+            border-radius: 2px;
+        }
+
+        .timeline-item {
+            display: flex;
+            margin-bottom: 4rem;
+            position: relative;
+            opacity: 0;
+            animation: fadeInUp 0.6s ease forwards;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .timeline-item:nth-child(odd) {
+            flex-direction: row-reverse;
+        }
+
+        .timeline-item:nth-child(1) { animation-delay: 0.1s; }
+        .timeline-item:nth-child(2) { animation-delay: 0.2s; }
+        .timeline-item:nth-child(3) { animation-delay: 0.3s; }
+        .timeline-item:nth-child(4) { animation-delay: 0.4s; }
+        .timeline-item:nth-child(5) { animation-delay: 0.5s; }
+
+        .timeline-content {
+            width: 45%;
+            background: var(--card-bg);
+            padding: 2rem;
+            border-radius: 20px;
+            border: 2px solid var(--border);
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            position: relative;
+        }
+
+        .timeline-content:hover {
+            transform: scale(1.03);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.3);
+        }
+
+        .timeline-dot {
+            position: absolute;
+            right: 50%;
+            transform: translateX(50%);
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            border: 5px solid var(--bg-primary);
+            z-index: 2;
+            box-shadow: 0 0 20px rgba(99, 102, 241, 0.6);
+            animation: pulse 2s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { box-shadow: 0 0 20px rgba(99, 102, 241, 0.6); }
+            50% { box-shadow: 0 0 35px rgba(99, 102, 241, 0.9); }
+        }
+
+        .timeline-dot.physics { background: var(--physics); }
+        .timeline-dot.chemistry { background: var(--chemistry); }
+        .timeline-dot.medicine { background: var(--medicine); }
+        .timeline-dot.math { background: var(--math); }
+        .timeline-dot.tech { background: var(--tech); }
+
+        .year-badge {
+            display: inline-block;
+            background: linear-gradient(135deg, var(--accent) 0%, var(--accent-hover) 100%);
+            color: white;
+            padding: 0.5rem 1.2rem;
+            border-radius: 20px;
+            font-size: 1.1rem;
+            font-weight: 800;
+            margin-bottom: 1rem;
+            box-shadow: 0 4px 15px rgba(99, 102, 241, 0.3);
+        }
+
+        .discovery-title {
+            font-size: 1.6rem;
+            margin-bottom: 0.8rem;
+            font-weight: 800;
+            color: var(--text-primary);
+        }
+
+        .scientist-name {
+            color: var(--accent-light);
+            font-size: 1.1rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+
+        .field-badge {
+            display: inline-block;
+            padding: 0.4rem 1rem;
+            border-radius: 15px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+        }
+
+        .field-badge.physics {
+            background: var(--physics);
+            color: white;
+        }
+
+        .field-badge.chemistry {
+            background: var(--chemistry);
+            color: white;
+        }
+
+        .field-badge.medicine {
+            background: var(--medicine);
+            color: white;
+        }
+
+        .field-badge.math {
+            background: var(--math);
+            color: white;
+        }
+
+        .field-badge.tech {
+            background: var(--tech);
+            color: white;
+        }
+
+        .discovery-description {
+            color: var(--text-secondary);
+            line-height: 1.8;
+            margin-bottom: 1rem;
+            font-size: 1.05rem;
+            font-weight: 500;
+        }
+
+        .impact-tag {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: rgba(99, 102, 241, 0.1);
+            padding: 0.5rem 1rem;
+            border-radius: 15px;
+            font-size: 0.95rem;
+            color: var(--accent-light);
+            font-weight: 600;
+            border: 1px solid var(--accent);
+        }
+
+        .historical-context {
+            background: rgba(99, 102, 241, 0.05);
+            padding: 1rem;
+            border-radius: 10px;
+            margin-top: 1rem;
+            border-right: 3px solid var(--accent);
+            font-size: 0.95rem;
+            color: var(--text-secondary);
+            font-style: italic;
+        }
+
+        .stats-section {
+            max-width: 1400px;
+            margin: 4rem auto 2rem;
+            padding: 0 2rem;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+
+        .stat-card {
+            background: var(--card-bg);
+            padding: 2rem;
+            border-radius: 20px;
+            text-align: center;
+            border: 2px solid var(--border);
+            transition: all 0.3s;
+        }
+
+        .stat-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(99, 102, 241, 0.2);
+        }
+
+        .stat-number {
+            font-size: 3rem;
+            font-weight: 900;
+            background: linear-gradient(135deg, var(--accent) 0%, var(--accent-light) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 0.5rem;
+        }
+
+        .stat-label {
+            color: var(--text-secondary);
+            font-size: 1.1rem;
+            font-weight: 600;
+        }
+
+        footer {
+            background: var(--bg-secondary);
+            text-align: center;
+            padding: 3rem 2rem;
+            margin-top: 5rem;
+            border-top: 2px solid var(--border);
+        }
+
+        footer p {
+            color: var(--text-secondary);
+            font-size: 1.05rem;
+            font-weight: 500;
+        }
+
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2.3rem;
+            }
+
+            .timeline-line {
+                right: 20px;
+            }
+
+            .timeline-item {
+                flex-direction: column !important;
+                padding-right: 50px;
+            }
+
+            .timeline-content {
+                width: 100%;
+            }
+
+            .timeline-dot {
+                right: 11px;
+            }
+
+            .nav-links {
+                flex-direction: column;
+                gap: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav>
+            <div class="logo">
+                <i class="fas fa-clock"></i>
+                الخط الزمني العلمي
+            </div>
+            <div class="nav-links">
+                <a href="index.html">الرئيسية</a>
+                <a href="women.html">نساء في العلوم</a>
+                 <a href="timeline.html">الخط الزمني العلمي</a>
+                <a href="The Scientific Library.html">المكتبة العلمية</a>
+                <a href="Arab and Muslim Scientists.html">العلماء العرب والمسلمون</a>
+                <a href="about.html">عن الموقع</a>
+                <button class="theme-toggle" onclick="toggleTheme()">
+                    <i class="fas fa-moon"></i>
+                </button>
+            </div>
+        </nav>
+    </header>
+
+    <section class="hero">
+        <h1>⏳ رحلة عبر الزمن العلمي</h1>
+        <p>استكشف أعظم الاكتشافات العلمية عبر التاريخ وتعرّف على السياق التاريخي لكل إنجاز</p>
+    </section>
+
+    <div class="stats-section">
+        <div class="stat-card">
+            <div class="stat-number">2000+</div>
+            <div class="stat-label">سنة من التقدم العلمي</div>
+        </div>
+        <div class="stat-card">
+            <div class="stat-number">50+</div>
+            <div class="stat-label">اكتشاف غيّر العالم</div>
+        </div>
+        <div class="stat-card">
+            <div class="stat-number">5</div>
+            <div class="stat-label">مجالات علمية رئيسية</div>
+        </div>
+    </div>
+
+    <div class="controls-section">
+        <div class="era-selector">
+            <button class="era-btn active" data-era="all">كل العصور</button>
+            <button class="era-btn" data-era="ancient">العصور القديمة (قبل 500م)</button>
+            <button class="era-btn" data-era="medieval">العصور الوسطى (500-1500م)</button>
+            <button class="era-btn" data-era="renaissance">عصر النهضة (1500-1800م)</button>
+            <button class="era-btn" data-era="modern">العصر الحديث (1800-1950م)</button>
+            <button class="era-btn" data-era="contemporary">العصر المعاصر (1950-الآن)</button>
+        </div>
+
+        <div class="field-filters">
+            <span class="field-tag physics" data-field="physics">⚛️ الفيزياء</span>
+            <span class="field-tag chemistry" data-field="chemistry">🧪 الكيمياء</span>
+            <span class="field-tag medicine" data-field="medicine">🏥 الطب</span>
+            <span class="field-tag math" data-field="math">📐 الرياضيات</span>
+            <span class="field-tag tech" data-field="tech">💻 التكنولوجيا</span>
+        </div>
+    </div>
+
+    <div class="timeline-container">
+        <div class="timeline-line"></div>
+        <div id="timelineContent"></div>
+    </div>
+
+    <footer>
+        <p>&copy; 2025 عباقرة عبر التاريخ | صُنع بواسطة عشاق العلوم</p>
+        <p style="margin-top: 0.5rem;">رحلة عبر الزمن العلمي 🚀</p>
+    </footer>
+
+    <script>
+        const discoveries = [
+            {
+                year: "300 ق.م",
+                title: "الهندسة الإقليدية",
+                scientist: "إقليدس",
+                field: "math",
+                era: "ancient",
+                description: "وضع إقليدس كتاب 'الأصول' الذي يعتبر أساس الهندسة الرياضية ودرّس لأكثر من 2000 عام.",
+                impact: "أساس علم الهندسة",
+                context: "في عصر الإسكندر الأكبر، ازدهرت العلوم في الإسكندرية وأصبحت مركزاً علمياً عالمياً."
+            },
+            {
+                year: "1000م",
+                title: "البصريات وقوانين الضوء",
+                scientist: "ابن الهيثم",
+                field: "physics",
+                era: "medieval",
+                description: "أسس علم البصريات الحديث وشرح كيفية عمل العين وانعكاس وانكسار الضوء في كتابه 'المناظر'.",
+                impact: "أبو علم البصريات",
+                context: "خلال العصر الذهبي الإسلامي، كانت بغداد والقاهرة مراكز علمية عالمية."
+            },
+            {
+                year: "1543م",
+                title: "نظام مركزية الشمس",
+                scientist: "نيكولاس كوبرنيكوس",
+                field: "physics",
+                era: "renaissance",
+                description: "أثبت أن الأرض والكواكب تدور حول الشمس، مغيراً فهمنا للكون بشكل جذري.",
+                impact: "ثورة علمية كبرى",
+                context: "في عصر النهضة الأوروبية، بدأت الكنيسة تفقد سيطرتها على العلوم."
+            },
+            {
+                year: "1687م",
+                title: "قوانين الحركة والجاذبية",
+                scientist: "إسحاق نيوتن",
+                field: "physics",
+                era: "renaissance",
+                description: "نشر كتاب 'المبادئ الرياضية للفلسفة الطبيعية' الذي وضع أسس الميكانيكا الكلاسيكية.",
+                impact: "أساس الفيزياء الكلاسيكية",
+                context: "خلال الثورة العلمية، بدأت أوروبا عصراً جديداً من التفكير العقلاني."
+            },
+            {
+                year: "1796م",
+                title: "لقاح الجدري",
+                scientist: "إدوارد جينر",
+                field: "medicine",
+                era: "modern",
+                description: "طور أول لقاح ناجح ضد الجدري، ممهداً الطريق لعلم المناعة الحديث.",
+                impact: "بداية عصر اللقاحات",
+                context: "في عصر الثورة الصناعية، بدأت الأمراض تنتشر في المدن المكتظة."
+            },
+            {
+                year: "1859م",
+                title: "نظرية التطور",
+                scientist: "تشارلز داروين",
+                field: "medicine",
+                era: "modern",
+                description: "نشر كتاب 'أصل الأنواع' موضحاً نظرية الانتقاء الطبيعي وتطور الكائنات الحية.",
+                impact: "فهم جديد للحياة",
+                context: "في العصر الفيكتوري، كانت بريطانيا في ذروة قوتها الاستعمارية والعلمية."
+            },
+            {
+                year: "1869م",
+                title: "الجدول الدوري للعناصر",
+                scientist: "ديمتري مندليف",
+                field: "chemistry",
+                era: "modern",
+                description: "رتب العناصر الكيميائية بناءً على خصائصها الذرية، متنبئاً بوجود عناصر لم تُكتشف بعد.",
+                impact: "أساس الكيمياء الحديثة",
+                context: "في روسيا القيصرية، كانت العلوم تشهد نهضة رغم القيود السياسية."
+            },
+            {
+                year: "1895م",
+                title: "اكتشاف الأشعة السينية",
+                scientist: "فيلهلم رونتجن",
+                field: "physics",
+                era: "modern",
+                description: "اكتشف الأشعة السينية بالصدفة، مما أحدث ثورة في التشخيص الطبي.",
+                impact: "ثورة في الطب",
+                context: "في نهاية القرن التاسع عشر، كانت ألمانيا رائدة في الأبحاث العلمية."
+            },
+            {
+                year: "1905م",
+                title: "النظرية النسبية الخاصة",
+                scientist: "ألبرت أينشتاين",
+                field: "physics",
+                era: "modern",
+                description: "غيّر فهمنا للزمان والمكان وأثبت أن الطاقة تساوي الكتلة مضروبة في مربع سرعة الضوء (E=mc²).",
+                impact: "ثورة في الفيزياء",
+                context: "قبل الحرب العالمية الأولى، كانت أوروبا في ذروة التقدم العلمي والثقافي."
+            },
+            {
+                year: "1928م",
+                title: "اكتشاف البنسلين",
+                scientist: "ألكسندر فليمنج",
+                field: "medicine",
+                era: "modern",
+                description: "اكتشف أول مضاد حيوي طبيعي، منقذاً ملايين الأرواح من الأمراض البكتيرية.",
+                impact: "عصر المضادات الحيوية",
+                context: "بعد الحرب العالمية الأولى، كانت الحاجة ملحة لعلاج الجروح والالتهابات."
+            },
+            {
+                year: "1953م",
+                title: "بنية الحمض النووي DNA",
+                scientist: "واطسون وكريك وفرانكلين",
+                field: "chemistry",
+                era: "contemporary",
+                description: "اكتشفوا البنية الحلزونية المزدوجة للحمض النووي، ممهدين الطريق لعلم الوراثة الجزيئي.",
+                impact: "ثورة جينية",
+                context: "خلال الحرب الباردة، كان السباق العلمي على أشده بين المعسكرين."
+            },
+            {
+                year: "1969م",
+                title: "الهبوط على القمر",
+                scientist: "ناسا وفريق أبولو",
+                field: "tech",
+                era: "contemporary",
+                description: "أول هبوط بشري على سطح القمر، إنجاز تاريخي في استكشاف الفضاء.",
+                impact: "عصر الفضاء",
+                context: "في ذروة الحرب الباردة، كان سباق الفضاء رمزاً للتفوق التكنولوجي."
+            },
+            {
+                year: "1983م",
+                title: "الإنترنت العالمي",
+                scientist: "تيم بيرنرز لي",
+                field: "tech",
+                era: "contemporary",
+                description: "اخترع شبكة الويب العالمية (WWW)، محدثاً ثورة في الاتصالات والمعلومات.",
+                impact: "عصر المعلومات",
+                context: "في نهاية الحرب الباردة، بدأ عصر العولمة والاتصالات الرقمية."
+            },
+            {
+                year: "2003م",
+                title: "مشروع الجينوم البشري",
+                scientist: "الفريق الدولي",
+                field: "medicine",
+                era: "contemporary",
+                description: "أكمل العلماء رسم الخريطة الكاملة للحمض النووي البشري، فاتحين آفاقاً جديدة في الطب الشخصي.",
+                impact: "عصر الطب الجيني",
+                context: "في بداية الألفية الثالثة، أصبحت التكنولوجيا الحيوية محور الأبحاث العلمية."
+            },
+            {
+                year: "2012م",
+                title: "اكتشاف جسيم هيغز",
+                scientist: "فريق سيرن",
+                field: "physics",
+                era: "contemporary",
+                description: "أكدوا وجود جسيم هيغز بوزون في مصادم الهدرونات الكبير، مفسرين أصل الكتلة في الكون.",
+                impact: "فهم بنية الكون",
+                context: "في عصر التعاون العلمي الدولي، شارك آلاف العلماء من مئات الدول في هذا الإنجاز."
+            },
+            {
+                year: "2019م",
+                title: "أول صورة لثقب أسود",
+                scientist: "فريق تلسكوب أفق الحدث",
+                field: "physics",
+                era: "contemporary",
+                description: "التقطوا أول صورة مباشرة لثقب أسود في مركز مجرة M87، مؤكدين نظريات أينشتاين.",
+                impact: "رؤية ما لا يُرى",
+                context: "في عصر البيانات الضخمة والحوسبة الفائقة، أصبحت الاكتشافات تتطلب تعاوناً عالمياً."
+            },
+            {
+                year: "2020م",
+                title: "لقاحات كوفيد-19",
+                scientist: "علماء عالميون",
+                field: "medicine",
+                era: "contemporary",
+                description: "تطوير لقاحات فعالة ضد فيروس كورونا في وقت قياسي باستخدام تقنية mRNA الجديدة.",
+                impact: "سرعة غير مسبوقة",
+                context: "خلال جائحة عالمية، اتحد العلماء لإنقاذ البشرية في سباق مع الزمن."
+            }
+        ];
+
+        let currentEra = 'all';
+        let activeFields = new Set(['physics', 'chemistry', 'medicine', 'math', 'tech']);
+
+        function displayTimeline() {
+            const container = document.getElementById('timelineContent');
+            
+            let filtered = discoveries.filter(d => {
+                const matchesEra = currentEra === 'all' || d.era === currentEra;
+                const matchesField = activeFields.has(d.field);
+                return matchesEra && matchesField;
+            });
+
+            if (filtered.length === 0) {
+                container.innerHTML = '<div style="text-align: center; padding: 4rem; color: var(--text-secondary); font-size: 1.2rem;">لا توجد اكتشافات تطابق الفلاتر المختارة</div>';
+                return;
+            }
+
+            container.innerHTML = filtered.map(discovery => `
+                <div class="timeline-item">
+                    <div class="timeline-dot ${discovery.field}"></div>
+                    <div class="timeline-content">
+                        <span class="year-badge">${discovery.year}</span>
+                        <h3 class="discovery-title">${discovery.title}</h3>
+                        <p class="scientist-name">👤 ${discovery.scientist}</p>
+                        <span class="field-badge ${discovery.field}">${getFieldName(discovery.field)}</span>
+                        <p class="discovery-description">${discovery.description}</p>
+                        <div class="impact-tag">
+                            <i class="fas fa-star"></i>
+                            ${discovery.impact}
+                        </div>
+                        <div class="historical-context">
+                            <i class="fas fa-landmark"></i> السياق التاريخي: ${discovery.context}
+                        </div>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        function getFieldName(field) {
+            const names = {
+                physics: '⚛️ الفيزياء',
+                chemistry: '🧪 الكيمياء',
+                medicine: '🏥 الطب',
+                math: '📐 الرياضيات',
+                tech: '💻 التكنولوجيا'
+            };
+            return names[field];
+        }
+
+        // Era selection
+        document.querySelectorAll('.era-btn').forEach(btn => {
+            btn.addEventListener('click', function() {
+                document.querySelectorAll('.era-btn').forEach(b => b.classList.remove('active'));
+                this.classList.add('active');
+                currentEra = this.dataset.era;
+                displayTimeline();
+            });
+        });
+
+        // Field filters
+        document.querySelectorAll('.field-tag').forEach(tag => {
+            tag.addEventListener('click', function() {
+                const field = this.dataset.field;
+                
+                if (activeFields.has(field)) {
+                    activeFields.delete(field);
+                    this.classList.add('inactive');
+                } else {
+                    activeFields.add(field);
+                    this.classList.remove('inactive');
+                }
+                
+                displayTimeline();
+            });
+        });
+
+        function toggleTheme() {
+            document.body.classList.toggle('light-mode');
+            const icon = document.querySelector('.theme-toggle i');
+            if (document.body.classList.contains('light-mode')) {
+                icon.className = 'fas fa-sun';
+            } else {
+                icon.className = 'fas fa-moon';
+            }
+        }
+
+        // Initial display
+        displayTimeline();
+    </script>
+</body>
+</html>
